@@ -1,21 +1,18 @@
 class Inteligencia:
     def __init__(self, nomeArquivoIA, arquivosExternos, ambientes,
-                 entradas, todosTiposJogadores, preJogos, partidas):
+                 entradas, todosTiposJogadores, preJogos):
         self.INomeArquivoIA = nomeArquivoIA
         self.IArquivosExternos = arquivosExternos
         self.IAmbientes = ambientes
         self.IEntradas = entradas
         self.ITodosTiposJogadores = todosTiposJogadores
         self.IPreJogos = preJogos
-        self.IPartidas = partidas
         self.Arvore = {}
 
     def __esqueletoNoh(self):
         return self.__definindoFolha(
             {'arestas': [''] * 9, 'score': [0] * 9,
-             'jogadas': self.IEntradas.getTodasJogadasDaRodada(),
-             'estado': self.IAmbientes.getCampo().copy(),
-             'partida': self.IPartidas.getPartidaAtual()})
+             'estado': self.IAmbientes.getCampo().copy()})
 
     def getArvore(self):
         if self.Arvore == {} or self.Arvore is None:
@@ -32,6 +29,15 @@ class Inteligencia:
         if not arvore or arvore == {}:
             arvore = noh
         self.Arvore = arvore
+
+    def salvaJogadasNohZero(self):
+        jogadasDaRodada = self.IEntradas.getTodasJogadasDaRodada()
+        try:
+            if jogadasDaRodada not in self.getArvore()['jogadas']:
+                self.getArvore()['jogadas'].append(self.IEntradas.getTodasJogadasDaRodada())
+        except:
+            self.getArvore()['jogadas'] = []
+            self.getArvore()['jogadas'].append(self.IEntradas.getTodasJogadasDaRodada())
 
     def guardaEstado(self):
         inteligente = self.ITodosTiposJogadores[3]

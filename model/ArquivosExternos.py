@@ -4,7 +4,7 @@ import os
 
 class ArquivosExternos:
     def __init__(self):
-        self.diretorio = 'C:/jogaDavelha_arquivos/'
+        self.diretorio = 'C:/jogo_da_velha_json/'
 
     # salva dados em um arquivo
     def salva(self, base, nomeArquivo):

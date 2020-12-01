@@ -7,5 +7,6 @@ class BaseDeDadosCtrl:
 
     def salvaAquivoCtrl(self):
         nomeArquivo = self.INomeArquivoIA
+        self.IInteligencia.salvaJogadasNohZero()
         arvore = self.IInteligencia.getArvore()
         self.IBaseDeDados.salva(arvore, nomeArquivo)

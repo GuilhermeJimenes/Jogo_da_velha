@@ -1,7 +1,7 @@
 class FimDeJogosCtrl:
     def __init__(self, preJogoCtrl, telaTabuleiro, fimDeJogo,
                  baseDeDadosCtrl, getTodosTiposJogadores,
-                 performances, inteligencia, entradas, partidas):
+                 performances, inteligencia, entradas):
         self.IPreJogoCtrl = preJogoCtrl
         self.ITelaTabuleiro = telaTabuleiro
         self.IFimDeJogo = fimDeJogo
@@ -10,7 +10,6 @@ class FimDeJogosCtrl:
         self.IPerformances = performances
         self.IInteligencia = inteligencia
         self.IEntradas = entradas
-        self.IPartidas = partidas
 
     def fimDeJogoCtrl(self, peca):
         jogadores = self.IPreJogoCtrl.getTiposJogadoresCtrl()
@@ -28,7 +27,6 @@ class FimDeJogosCtrl:
     # controla o fluxo de fim de jogo
     def naoVelhaCtrl(self, peca):
         if self.IFimDeJogo.ganhou(peca):
-            self.IPartidas.fimDaPartida()
             self.IPerformances.ConstroiPerformance(peca)
             self.aplicaReforco(peca)
             self.IBaseDeDadosCtrl.salvaAquivoCtrl()
@@ -37,7 +35,6 @@ class FimDeJogosCtrl:
     # retorna verificação de velha
     def velhaCtrl(self):
         if self.IFimDeJogo.velha():
-            self.IPartidas.fimDaPartida()
             self.IPerformances.ConstroiPerformance()
             self.IBaseDeDadosCtrl.salvaAquivoCtrl()
             return True

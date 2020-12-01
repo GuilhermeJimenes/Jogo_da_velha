@@ -59,7 +59,7 @@ class Dependencia:
                 self.fimDeJogos(), self.baseDeDadosCtrl(),
                 self.dadosFixos().getTodosTiposJogadores(),
                 self.performances(), self.inteligencia(),
-                self.entradas(), self.partidas()
+                self.entradas()
             )
         return self.IFimDeJogoCtrl
 
@@ -137,8 +137,8 @@ class Dependencia:
         if self.IInteligencia is None:
             self.IInteligencia = Inteligencia(
                 self.dadosFixos().nomeArquivoIA(), self.arquivosExternos(),
-                self.ambientes(), self.entradas(), self.dadosFixos().getTodosTiposJogadores(),
-                self.preJogos(), self.partidas())
+                self.ambientes(), self.entradas(),
+                self.dadosFixos().getTodosTiposJogadores(), self.preJogos())
         return self.IInteligencia
 
     def ambientes(self):
@@ -174,12 +174,6 @@ class Dependencia:
             self.IFimDeJogo = FimDeJogos(
                 self.ambientes(), self.dadosFixos().simboloCampoVazio())
         return self.IFimDeJogo
-
-    def partidas(self):
-        from model.Partidas import Partidas
-        if self.IPartidas is None:
-            self.IPartidas = Partidas()
-        return self.IPartidas
 
     def performances(self):
         from model.Performances import Performances
