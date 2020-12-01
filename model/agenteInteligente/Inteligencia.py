@@ -31,28 +31,18 @@ class Inteligencia:
             arvore = noh
         self.Arvore = arvore
 
-    def pegaDadosGrafo(self):
-        jogadasDaRodada = self.IEntradas.getTodasJogadasDaRodada()
-        achouUm, achoDois = self.verificaIApartida()
-        if achouUm and achoDois:
-            return jogadasDaRodada, self.scoreDaRodada
-        elif achouUm:
-            return jogadasDaRodada[::2], self.scoreDaRodada[::2]
-        elif achoDois:
-            return jogadasDaRodada[1::2], self.scoreDaRodada[1::2]
-
     def salvaDadosGrafo(self):
-        jogadasInteligente, scoreInteligente = self.pegaDadosGrafo()
+        jogadasDaRodada = self.IEntradas.getTodasJogadasDaRodada()
         try:
-            if jogadasInteligente not in self.getArvore()['jogadasInteligente']:
-                self.getArvore()['jogadasInteligente'].append(jogadasInteligente)
-            if jogadasInteligente not in self.getArvore()['scoreInteligente']:
-                self.getArvore()['scoreInteligente'].append(scoreInteligente)
+            if jogadasDaRodada not in self.getArvore()['jogadasDaRodada']:
+                self.getArvore()['jogadasDaRodada'].append(jogadasDaRodada)
+                self.getArvore()['scoreDaRodada'].append(self.scoreDaRodada)
         except:
-            self.getArvore()['jogadasInteligente'] = []
-            self.getArvore()['jogadasInteligente'].append(jogadasInteligente)
-            self.getArvore()['scoreInteligente'] = []
-            self.getArvore()['scoreInteligente'].append(scoreInteligente)
+            self.getArvore()['jogadasDaRodada'] = []
+            self.getArvore()['jogadasDaRodada'].append(jogadasDaRodada)
+
+            self.getArvore()['scoreDaRodada'] = []
+            self.getArvore()['scoreDaRodada'].append(self.scoreDaRodada)
 
     def guardaEstado(self):
         inteligente = self.ITodosTiposJogadores[3]
