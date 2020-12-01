@@ -6,7 +6,7 @@ class BaseDeDadosCtrl:
         self.IInteligencia = inteligencia
 
     def salvaAquivoCtrl(self):
+        self.IInteligencia.salvaDadosGrafo()
         nomeArquivo = self.INomeArquivoIA
-        self.IInteligencia.salvaJogadasNohZero()
         arvore = self.IInteligencia.getArvore()
         self.IBaseDeDados.salva(arvore, nomeArquivo)
