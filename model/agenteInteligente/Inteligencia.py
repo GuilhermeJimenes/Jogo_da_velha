@@ -46,8 +46,8 @@ class Inteligencia:
 
     def guardaEstado(self):
         inteligente = self.ITodosTiposJogadores[3]
-        if inteligente in self.IPreJogos.getTiposJogadoresDaRodada():
-            self.__novoNoh(self.__esqueletoNoh())
+        # if inteligente in self.IPreJogos.getTiposJogadoresDaRodada():
+        self.__novoNoh(self.__esqueletoNoh())
 
     # adicionar infinito no scores que não podem mais ser jogados
     def __definindoFolha(self, noh):
@@ -155,90 +155,94 @@ class Inteligencia:
         if achoDois:
             if pecaQueGanhou == 'X':
                 reforcoUm = 1
-            else:
+            elif pecaQueGanhou == 'O':
                 reforcoUm = -1
 
         if achouUm:
             if pecaQueGanhou == 'O':
                 reforcoDois = 1
-            else:
+            elif pecaQueGanhou == 'X':
                 reforcoDois = -1
 
         return reforcoUm, reforcoDois
 
     def reforco(self, arvore, pecaQueGanhou):
-        reforcoUm, reforcoDois = self.quantidadeReforco(pecaQueGanhou)
-        j = self.IEntradas.getTodasJogadasDaRodada()
-        qntJogadas = len(j)
-        try:
-            if qntJogadas >= 1:
-                # print("reforco 1!")
-                self.pegaQualquerNoh(j[:1])['score'][j[0]] += reforcoDois
-                self.scoreDaRodada.append(self.pegaQualquerNoh(j[:1])['score'][j[0]])
-            else:
-                return
+        inteligente = self.ITodosTiposJogadores[3]
+        jogadores = self.IPreJogos.getTiposJogadoresDaRodada()
 
-            if qntJogadas >= 2:
-                # print("reforco 2!")
-                self.pegaQualquerNoh(j[:2])['score'][j[1]] += reforcoUm
-                self.scoreDaRodada.append(self.pegaQualquerNoh(j[:2])['score'][j[1]])
-            else:
-                return
+        if inteligente in jogadores:
+            reforcoUm, reforcoDois = self.quantidadeReforco(pecaQueGanhou)
+            j = self.IEntradas.getTodasJogadasDaRodada()
+            qntJogadas = len(j)
+            try:
+                if qntJogadas >= 1:
+                    # print("reforco 1!")
+                    self.pegaQualquerNoh(j[:1])['score'][j[0]] += reforcoDois
+                    self.scoreDaRodada.append(self.pegaQualquerNoh(j[:1])['score'][j[0]])
+                else:
+                    return
 
-            if qntJogadas >= 3:
-                # print("reforco 3!")
-                self.pegaQualquerNoh(j[:3])['score'][j[2]] += reforcoDois
-                self.scoreDaRodada.append(self.pegaQualquerNoh(j[:3])['score'][j[2]])
-            else:
-                return
+                if qntJogadas >= 2:
+                    # print("reforco 2!")
+                    self.pegaQualquerNoh(j[:2])['score'][j[1]] += reforcoUm
+                    self.scoreDaRodada.append(self.pegaQualquerNoh(j[:2])['score'][j[1]])
+                else:
+                    return
 
-            if qntJogadas >= 4:
-                # print("reforco 4!")
-                self.pegaQualquerNoh(j[:4])['score'][j[3]] += reforcoUm
-                self.scoreDaRodada.append(self.pegaQualquerNoh(j[:4])['score'][j[3]])
-            else:
-                return
+                if qntJogadas >= 3:
+                    # print("reforco 3!")
+                    self.pegaQualquerNoh(j[:3])['score'][j[2]] += reforcoDois
+                    self.scoreDaRodada.append(self.pegaQualquerNoh(j[:3])['score'][j[2]])
+                else:
+                    return
 
-            if qntJogadas >= 5:
-                # print("reforco 5!")
-                self.pegaQualquerNoh(j[:5])['score'][j[4]] += reforcoDois
-                self.scoreDaRodada.append(self.pegaQualquerNoh(j[:5])['score'][j[4]])
-            else:
-                return
+                if qntJogadas >= 4:
+                    # print("reforco 4!")
+                    self.pegaQualquerNoh(j[:4])['score'][j[3]] += reforcoUm
+                    self.scoreDaRodada.append(self.pegaQualquerNoh(j[:4])['score'][j[3]])
+                else:
+                    return
 
-            if qntJogadas >= 6:
-                # print("reforco 6!")
-                self.pegaQualquerNoh(j[:6])['score'][j[5]] += reforcoUm
-                self.scoreDaRodada.append(self.pegaQualquerNoh(j[:6])['score'][j[5]])
-            else:
-                return
+                if qntJogadas >= 5:
+                    # print("reforco 5!")
+                    self.pegaQualquerNoh(j[:5])['score'][j[4]] += reforcoDois
+                    self.scoreDaRodada.append(self.pegaQualquerNoh(j[:5])['score'][j[4]])
+                else:
+                    return
 
-            if qntJogadas >= 7:
-                # print("reforco 7!")
-                self.pegaQualquerNoh(j[:7])['score'][j[6]] += reforcoDois
-                self.scoreDaRodada.append(self.pegaQualquerNoh(j[:7])['score'][j[6]])
-            else:
-                return
+                if qntJogadas >= 6:
+                    # print("reforco 6!")
+                    self.pegaQualquerNoh(j[:6])['score'][j[5]] += reforcoUm
+                    self.scoreDaRodada.append(self.pegaQualquerNoh(j[:6])['score'][j[5]])
+                else:
+                    return
 
-            if qntJogadas >= 8:
-                # print("reforco 8!")
-                self.pegaQualquerNoh(j[:8])['score'][j[7]] += reforcoUm
-                self.scoreDaRodada.append(self.pegaQualquerNoh(j[:8])['score'][j[7]])
-            else:
-                return
+                if qntJogadas >= 7:
+                    # print("reforco 7!")
+                    self.pegaQualquerNoh(j[:7])['score'][j[6]] += reforcoDois
+                    self.scoreDaRodada.append(self.pegaQualquerNoh(j[:7])['score'][j[6]])
+                else:
+                    return
 
-            if qntJogadas >= 9:
-                # print("reforco 9!")
-                self.pegaQualquerNoh(j[:9])['score'][j[8]] += reforcoDois
-                self.scoreDaRodada.append(self.pegaQualquerNoh(j[:9])['score'][j[8]])
-            else:
+                if qntJogadas >= 8:
+                    # print("reforco 8!")
+                    self.pegaQualquerNoh(j[:8])['score'][j[7]] += reforcoUm
+                    self.scoreDaRodada.append(self.pegaQualquerNoh(j[:8])['score'][j[7]])
+                else:
+                    return
+
+                if qntJogadas >= 9:
+                    # print("reforco 9!")
+                    self.pegaQualquerNoh(j[:9])['score'][j[8]] += reforcoDois
+                    self.scoreDaRodada.append(self.pegaQualquerNoh(j[:9])['score'][j[8]])
+                else:
+                    return
                 return
-            return
-        except:
-            print(f'''
-            ERRO ATRIBUIR REFORÇO! METODO reforco.
-            Quantidade de jogadas do inteligente nessa rodada: {qntJogadas}.
-            Todas as jogadas do inteligente nessa rodada: {j};
-            Arvore atual: {arvore}.
-            ''')
-            exit()
+            except:
+                print(f'''
+                ERRO ATRIBUIR REFORÇO! METODO reforco.
+                Quantidade de jogadas do inteligente nessa rodada: {qntJogadas}.
+                Todas as jogadas do inteligente nessa rodada: {j};
+                Arvore atual: {arvore}.
+                ''')
+                exit()

@@ -36,10 +36,11 @@ class FimDeJogosCtrl:
     def velhaCtrl(self):
         if self.IFimDeJogo.velha():
             self.IPerformances.ConstroiPerformance()
+            self.aplicaReforco()
             self.IBaseDeDadosCtrl.salvaAquivoCtrl()
             return True
         return False
 
-    def aplicaReforco(self, peca):
+    def aplicaReforco(self, peca=None):
         arvore = self.IInteligencia.getArvore()
         self.IInteligencia.reforco(arvore, peca)
