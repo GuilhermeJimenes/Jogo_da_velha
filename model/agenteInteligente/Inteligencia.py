@@ -135,33 +135,24 @@ class Inteligencia:
             ''')
             exit()
 
-    def verificaIApartida(self):
-        tipoJogadorUm, tipoJogadorDois = self.IPreJogos.getTiposJogadoresDaRodada()
-        inteligente = self.ITodosTiposJogadores[3]
-        achouUm = False
-        achoDois = False
-        if tipoJogadorUm == inteligente:
-            achouUm = True
-        if tipoJogadorDois == inteligente:
-            achoDois = True
-        return achouUm, achoDois
-
     def quantidadeReforco(self, pecaQueGanhou):
         reforcoUm = 0
         reforcoDois = 0
-        achouUm, achoDois = self.verificaIApartida()
+        tipoJogadorUm, tipoJogadorDois = self.IPreJogos.getTiposJogadoresDaRodada()
+        inteligente = self.ITodosTiposJogadores[3]
 
-        if achoDois:
-            if pecaQueGanhou == 'X':
-                reforcoUm = 1
-            elif pecaQueGanhou == 'O':
-                reforcoUm = -1
+        if inteligente in self.IPreJogos.getTiposJogadoresDaRodada():
+            if tipoJogadorDois == inteligente:
+                if pecaQueGanhou == 'X':
+                    reforcoUm = 1
+                elif pecaQueGanhou == 'O':
+                    reforcoUm = -1
 
-        if achouUm:
-            if pecaQueGanhou == 'O':
-                reforcoDois = 1
-            elif pecaQueGanhou == 'X':
-                reforcoDois = -1
+            if tipoJogadorUm == inteligente:
+                if pecaQueGanhou == 'O':
+                    reforcoDois = 1
+                elif pecaQueGanhou == 'X':
+                    reforcoDois = -1
 
         return reforcoUm, reforcoDois
 
